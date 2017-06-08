@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="line_height">1dp</dimen>
+    <!--Main UI-->
+    <dimen name="fw_status_icon">16dp</dimen>
+    <dimen name="fw_status_layout_margin_horizontal">10dp</dimen>
+    <dimen name="fw_status_layout_vertical">5dp</dimen>
+    <dimen name="fw_status_margin">5dp</dimen>
+    <dimen name="fw_app_list_title_margin">10dp</dimen>
+    <dimen name="fw_app_list_title_icon_size">25dp</dimen>
+
+    <!--List Apps-->
+    <dimen name="list_app_padding_horizontal">5dp</dimen>
+    <dimen name="list_img_check_size">25dp</dimen>
+    <dimen name="app_item_icon_size">50dp</dimen>
+    <dimen name="app_item_icon_padding">2dp</dimen>
+    <dimen name="app_item_margin">5dp</dimen>
+
+    <!--about-->
+    <dimen name="about_app_icon_padding">7dp</dimen>
+    <dimen name="about_margin_top_small">12dp</dimen>
+    <dimen name="about_margin_top">22dp</dimen>
+    <dimen name="about_margin_start">50dp</dimen>
+    <dimen name="about_like_icon_size">50dp</dimen>
+    <dimen name="about_app_icon_size">100dp</dimen>
+    <dimen name="about_text_size">17dp</dimen>
+    <dimen name="about_text_size_small">14dp</dimen>
+    <dimen name="about_text_size_big">25dp</dimen>
+
+    <!--Ads-->
+    <dimen name="ads_margin_top">5dp</dimen>
+    <dimen name="size_ads_layout">60dp</dimen>
+</resources>

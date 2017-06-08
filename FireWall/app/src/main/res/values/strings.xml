@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Ultra Firewall</string>
+    <string name="version_name">1.0</string>
+
+    <!--Main UI-->
+    <string name="fw_off_title">FireWall is off, allow all app access internet</string>
+    <string name="fw_on_title">FireWall is on, block selected from access internet</string>
+    <string name="fw_no_app_found">No Apps founded!</string>
+    <string name="pid_title">UID\u0020\u0020\u0020\u0020\u0020\u0020\u0020</string>
+    <string name="app_title">Application Details</string>
+
+    <!--Menu-->
+    <string name="setting_title">Settings</string>
+    <string name="stop_title">Stop FireWall</string>
+    <string name="run_title">Execute Rules</string>
+
+    <!--raw-->
+    <string name="raw_iptables">iptables_armv5</string>
+    <string name="raw_busy_box">busybox_g1</string>
+
+    <!--Notification-->
+    <string name="toast_bin_install_done">Binaries installed!</string>
+    <string name="toast_bin_install_error">Error in installing %s!</string>
+    <string name="dialog_loadApp_msg">Loading Apps, please wait...</string>
+    <string name="snack_rule_saved">Rules Saved!</string>
+    <string name="snack_execute_failed">Apply FireWall rules failed!</string>
+    <string name="snack_execute_done">Apply FireWall rules successfully!</string>
+
+
+    <!--For Ads View-->
+    <string name="ad_unit_banner" translatable="false">ca-app-pub-6288726369328806/7080626173</string>
+    <!--About-->
+    <string name="action_about">About</string>
+    <string name="app_info">Ultra Firewall ver 1.0</string>
+    <string name="author">Author: Pham Van Manh</string>
+    <string name="email">Email: manhterry93@gmail.com</string>
+    <string name="icon_res">Icon Resources: https://icons8.com &amp;&amp; David Cross-http://webhostingmedia.net/</string>
+    <string name="note">Note: This App require Root Access. \n So your device must be rooted to use this app.</string>
+    <string name="about_like">If you like this app, rate 5 stars for us!</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+       android:insetLeft="3dp"
+       android:insetTop="10dp"
+       android:insetRight="3dp"
+       android:insetBottom="10dp">
+    <shape android:shape="rectangle">
+        <corners android:radius="1dp" />
+        <solid android:color="#26000000" /> <!-- button color : black 15% -->
+        <padding android:left="9dp"
+                 android:right="9dp" />
+    </shape>
+</inset>
