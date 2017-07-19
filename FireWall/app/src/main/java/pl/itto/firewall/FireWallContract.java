@@ -1,5 +1,7 @@
 package pl.itto.firewall;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import pl.itto.firewall.data.AppItem;
 
 public interface FireWallContract {
     interface View extends BaseView<Presenter> {
+        void sortApps();
         void showNoApps();
 
         void showApps(List<AppItem> list);
@@ -37,9 +40,17 @@ public interface FireWallContract {
         void ruleSavedNotify();
 
         void showMsg(String msg);
+
+        void openSortDialog();
+
+        void clearSearch();
+
     }
 
     interface Presenter extends BasePresenter {
+        Bundle getSetting();
+
+        void saveSetting(Intent intent);
 
         boolean getState();
 
@@ -52,6 +63,8 @@ public interface FireWallContract {
         void reloadAppList();
 
         void loadApps();
+
+        void sortApps(Bundle setting);
 
         void toggleAppState(boolean isWifi, int pos, AppItem item, android.view.View v);
     }

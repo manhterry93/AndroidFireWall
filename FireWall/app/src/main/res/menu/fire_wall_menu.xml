@@ -14,8 +14,14 @@
         app:showAsAction="always"/>
     <item
         android:id="@+id/action_setting"
-        android:visible="false"
-        android:title="@string/setting_title"/>
+        android:title="@string/setting_title"
+        android:visible="false"/>
+    <item
+        android:id="@+id/action_sort"
+        android:icon="@drawable/ic_sort"
+        android:title="@string/sort_title"
+        app:showAsAction="ifRoom"
+        />
     <item
         android:id="@+id/action_detail"
         android:icon="@drawable/ic_info"

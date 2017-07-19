@@ -1,5 +1,7 @@
 package pl.itto.firewall.data;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -39,4 +41,7 @@ public interface AppDataSource {
     void saveState(boolean on, @Nullable SaveStateCallback callback);
 
     boolean getState();
+
+    void  saveSettings(Intent setting);
+    Bundle getSettings();
 }

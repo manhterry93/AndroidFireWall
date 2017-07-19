@@ -7,8 +7,15 @@
     <dimen name="fw_status_layout_margin_horizontal">10dp</dimen>
     <dimen name="fw_status_layout_vertical">5dp</dimen>
     <dimen name="fw_status_margin">5dp</dimen>
-    <dimen name="fw_app_list_title_margin">10dp</dimen>
+    <dimen name="fw_app_list_title_margin">2dp</dimen>
     <dimen name="fw_app_list_title_icon_size">25dp</dimen>
+    <dimen name="fw_option_bar_sort_icon_size">25dp</dimen>
+    <dimen name="fw_option_check_all_size">25dp</dimen>
+    <dimen name="fw_option_bar_padding_horizontal">5dp</dimen>
+    <dimen name="fw_option_bar_check_margin">5dp</dimen>
+    <dimen name="fw_search_box_height">30dp</dimen>
+    <dimen name="fw_search_box_margin_vertical">2dp</dimen>
+
 
     <!--List Apps-->
     <dimen name="list_app_padding_horizontal">5dp</dimen>
@@ -28,6 +35,11 @@
     <dimen name="about_text_size_small">14dp</dimen>
     <dimen name="about_text_size_big">25dp</dimen>
     <!--Ads-->
-    <dimen name="ads_margin_top">3dp</dimen>
+    <dimen name="ads_margin_top">1dp</dimen>
     <dimen name="size_ads_layout">50dp</dimen>
+
+    <!--Sort Dialog-->
+    <dimen name="fw_sort_title_text_size">17dp</dimen>
+    <dimen name="fw_sort_padding">10dp</dimen>
+    <dimen name="fw_sort_margin_content">7dp</dimen>
 </resources>

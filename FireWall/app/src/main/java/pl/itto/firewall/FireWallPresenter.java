@@ -1,5 +1,7 @@
 package pl.itto.firewall;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +36,17 @@ public class FireWallPresenter implements FireWallContract.Presenter {
         mAppsView.updateState(getState());
     }
 
+
+    @Override
+    public Bundle getSetting() {
+        return mAppRepository.getSettings();
+    }
+
+    @Override
+    public void saveSetting(Intent intent) {
+        mAppRepository.saveSettings(intent);
+        mAppsView.sortApps();
+    }
 
     @Override
     public boolean getState() {
@@ -99,6 +112,7 @@ public class FireWallPresenter implements FireWallContract.Presenter {
 
     @Override
     public void loadApps() {
+        mAppsView.clearSearch();
         mAppsView.showLoadingAppsProgress();
         mAppRepository.getApps(new AppDataSource.LoadAppCallback() {
             @Override
@@ -106,6 +120,11 @@ public class FireWallPresenter implements FireWallContract.Presenter {
                 loadPrefs();
             }
         });
+    }
+
+    @Override
+    public void sortApps(Bundle setting) {
+
     }
 
 //    @Override

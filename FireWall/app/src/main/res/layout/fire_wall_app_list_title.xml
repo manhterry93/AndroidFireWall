@@ -37,7 +37,7 @@
         <ImageView
             android:layout_width="@dimen/fw_app_list_title_icon_size"
             android:layout_height="@dimen/fw_app_list_title_icon_size"
-            android:layout_marginLeft="@dimen/app_item_margin"
+            android:layout_marginStart="@dimen/app_item_margin"
             android:src="@drawable/data"/>
 
 

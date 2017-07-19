@@ -30,5 +30,5 @@
 
     <!--Ads-->
     <dimen name="ads_margin_top">5dp</dimen>
-    <dimen name="size_ads_layout">60dp</dimen>
+    <dimen name="size_ads_layout">50dp</dimen>
 </resources>

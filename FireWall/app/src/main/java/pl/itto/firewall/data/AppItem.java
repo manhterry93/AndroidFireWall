@@ -26,10 +26,12 @@ public class AppItem {
     public void setIcon(Drawable icon) {
         mIcon = icon;
     }
-    public AppItem(){
-        mBlockData=false;
-        mBlockWifi=false;
+
+    public AppItem() {
+        mBlockData = false;
+        mBlockWifi = false;
     }
+
     public int getUID() {
         return mUID;
     }
@@ -86,5 +88,9 @@ public class AppItem {
                 return ResBlock;
             return ResAllow;
         }
+    }
+
+    public boolean isBlocked() {
+        return isBlockWifi() || isBlockData();
     }
 }

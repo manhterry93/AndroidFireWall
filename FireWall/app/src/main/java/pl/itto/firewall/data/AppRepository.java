@@ -2,10 +2,12 @@ package pl.itto.firewall.data;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -35,6 +37,14 @@ public class AppRepository implements AppDataSource {
     public static final String SHARE_PREFERENCE_NAME = "firewall_pref";
     public static final String BLOCK_WIFI_KEY = "block_wifi";
     public static final String BLOCK_DATA_KEY = "block_data";
+    public static final String SORT_TYPE_KEY = "sort_type";
+    public static final String SORT_BLOCK_KEY = "sort_blocked_top";
+
+    public static final int SORT_A_Z = 1;
+    public static final int SORT_Z_A = 2;
+    public static final int SORT_UID_UP = 3;
+    public static final int SORT_UID_DOWN = 4;
+
     public static final String FIREWALL_STATE = "fw_state";
 
     private static AppRepository sAppRepository = null;
@@ -158,6 +168,23 @@ public class AppRepository implements AppDataSource {
         return mSharedPreferences.getBoolean(FIREWALL_STATE, false);
     }
 
+    @Override
+    public void saveSettings(Intent setting) {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putInt(SORT_TYPE_KEY, setting.getIntExtra(SORT_TYPE_KEY, SORT_A_Z));
+        editor.putBoolean(SORT_BLOCK_KEY, setting.getBooleanExtra(SORT_BLOCK_KEY, true));
+        editor.commit();
+    }
+
+
+    @Override
+    public Bundle getSettings() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(SORT_TYPE_KEY, mSharedPreferences.getInt(SORT_TYPE_KEY, 0));
+        bundle.putBoolean(SORT_BLOCK_KEY, mSharedPreferences.getBoolean(SORT_BLOCK_KEY, true));
+        return bundle;
+    }
+
 
     class LoadAppAsync extends AsyncTask<Void, Void, List<AppItem>> {
         LoadAppCallback mLoadAppCallback;
@@ -196,7 +223,6 @@ public class AppRepository implements AppDataSource {
 
             mAppsList.clear();
             mAppsList.addAll(listApps.values());
-            Collections.sort(mAppsList, mAppItemComparator);
             return mAppsList;
         }
 
@@ -207,12 +233,6 @@ public class AppRepository implements AppDataSource {
         }
     }
 
-    private Comparator<AppItem> mAppItemComparator = new Comparator<AppItem>() {
-        @Override
-        public int compare(AppItem o1, AppItem o2) {
-            return o1.getAllNames().compareTo(o2.getAllNames());
-        }
-    };
 
     private Comparator<String> mRuleComparator = new Comparator<String>() {
         @Override
