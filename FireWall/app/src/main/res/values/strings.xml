@@ -3,6 +3,7 @@
     <string name="version_name">1.0</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="exit_toast">Press back again to exit!</string>
 
     <!--Main UI-->
     <string name="fw_off_title">FireWall is off, allowing all apps to access internet</string>

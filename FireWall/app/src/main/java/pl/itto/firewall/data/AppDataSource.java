@@ -24,7 +24,8 @@ public interface AppDataSource {
         void onStateSaved();
     }
 
-    void toggleAppState(int pos, boolean isWifi);
+//    void toggleAppState(int pos, boolean isWifi);
+    void toggleAppState(int uid, boolean isWifi);
 
     void getApps(@NonNull LoadAppCallback callback);
 

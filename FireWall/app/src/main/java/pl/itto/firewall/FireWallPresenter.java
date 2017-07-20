@@ -35,8 +35,6 @@ public class FireWallPresenter implements FireWallContract.Presenter {
         loadApps();
         mAppsView.updateState(getState());
     }
-
-
     @Override
     public Bundle getSetting() {
         return mAppRepository.getSettings();
@@ -55,19 +53,25 @@ public class FireWallPresenter implements FireWallContract.Presenter {
 
     @Override
     public void clearRules() {
-        mUtilContract.clearIptablesRules(new UtilContract.ApplyRulesCallback() {
+        mAppRepository.saveRules(new AppDataSource.SaveRulesCallback() {
             @Override
-            public void onApplyRuleDone(String msg) {
-                mAppsView.showMsg(msg);
-                mAppRepository.saveState(false, null);
-                mAppsView.updateState(false);
-            }
+            public void onRulesSaved() {
+                mUtilContract.clearIptablesRules(new UtilContract.ApplyRulesCallback() {
+                    @Override
+                    public void onApplyRuleDone(String msg) {
+                        mAppsView.showMsg(msg);
+                        mAppRepository.saveState(false, null);
+                        mAppsView.updateState(false);
+                    }
 
-            @Override
-            public void onApplyFailed(String errMsg) {
-                mAppsView.showMsg(errMsg);
+                    @Override
+                    public void onApplyFailed(String errMsg) {
+                        mAppsView.showMsg(errMsg);
+                    }
+                });
             }
         });
+
     }
 
     @Override
@@ -88,7 +92,7 @@ public class FireWallPresenter implements FireWallContract.Presenter {
                     public void onApplyFailed(String errMsg) {
                         mAppsView.showMsg(errMsg);
                     }
-                }, mAppRepository.getListBlock(true), mAppRepository.getListBlock(false));
+                }, mAppRepository.getListBlock(false), mAppRepository.getListBlock(true));
             }
         });
 
@@ -140,6 +144,12 @@ public class FireWallPresenter implements FireWallContract.Presenter {
 //            mAppsView.toggleState(v, !item.isBlockWifi());
 //        else
 //            mAppsView.toggleState(v, item.isBlockData());
+    }
+
+    @Override
+    public void toggleAppState(boolean isWifi, AppItem item, View v) {
+        mAppRepository.toggleAppState(item.getUID(), isWifi);
+        mAppsView.reloadAppList();
     }
 
 

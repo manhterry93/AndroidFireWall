@@ -30,11 +30,13 @@
             android:textColor="@color/colorStatusTitle"/>
 
         <ImageView
+            android:id="@+id/img_block_wifi"
             android:layout_width="@dimen/fw_app_list_title_icon_size"
             android:layout_height="@dimen/fw_app_list_title_icon_size"
             android:src="@drawable/wifi"/>
 
         <ImageView
+            android:id="@+id/img_block_data"
             android:layout_width="@dimen/fw_app_list_title_icon_size"
             android:layout_height="@dimen/fw_app_list_title_icon_size"
             android:layout_marginStart="@dimen/app_item_margin"

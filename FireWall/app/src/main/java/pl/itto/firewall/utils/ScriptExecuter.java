@@ -30,7 +30,7 @@ public class ScriptExecuter extends Thread {
     private String mScript;
     private boolean mAsRoot = false;
     private Context mContext;
-    private Process exec;
+    private Process process;
     private int exitCode;
     private boolean mUseScript = true;
 
@@ -38,6 +38,7 @@ public class ScriptExecuter extends Thread {
         this.mContext = context;
         this.mRulesCallback = callback;
         mUseScript = false;
+        exitCode = -1;
     }
 
     /**
@@ -48,7 +49,7 @@ public class ScriptExecuter extends Thread {
      * @param root   run as Root
      */
     public void setData(File file, @Nullable String script, boolean root) {
-//        Log.i(TAG, "script: " + script);
+        Log.i(TAG, "script: " + script);
         if (script != null) {
             mUseScript = true;
             this.mScript = script;
@@ -77,7 +78,7 @@ public class ScriptExecuter extends Thread {
                 out.close();
             }
             //Start execute the cmd
-            Process process = Runtime.getRuntime().exec("su");
+            process = Runtime.getRuntime().exec("su");
             OutputStream stdin = process.getOutputStream();
             InputStream stdout = process.getInputStream();
             InputStream stderr = process.getErrorStream();
@@ -100,6 +101,7 @@ public class ScriptExecuter extends Thread {
             reader.close();
             process.waitFor();
             process.destroy();
+            process = null;
             exitCode = 0;
         } catch (IOException e) {
             exitCode = 1;
@@ -113,9 +115,9 @@ public class ScriptExecuter extends Thread {
     }
 
     public synchronized void destroyProcess() {
-        if (exec != null)
-            exec.destroy();
-        exec = null;
+        if (process != null)
+            process.destroy();
+        process = null;
         if (exitCode == 0)
             mRulesCallback.onApplyRuleDone(mContext.getString(R.string.snack_execute_done));
         else

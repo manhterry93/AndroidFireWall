@@ -116,6 +116,9 @@ public class SortDialog extends DialogFragment {
             case AppRepository.SORT_UID_DOWN:
                 mRadio_UID_down.setChecked(true);
                 break;
+            default:
+                mRadioA_Z.setChecked(true);
+                break;
         }
     }
 }

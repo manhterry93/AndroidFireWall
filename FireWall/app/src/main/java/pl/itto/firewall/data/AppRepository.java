@@ -75,12 +75,15 @@ public class AppRepository implements AppDataSource {
     }
 
     @Override
-    public void toggleAppState(int pos, boolean isWifi) {
-        AppItem item = mAppsList.get(pos);
-        if (isWifi)
-            item.setBlockWifi(!item.isBlockWifi());
-        else
-            item.setBlockData(!item.isBlockData());
+    public void toggleAppState(int uid, boolean isWifi) {
+        for (AppItem item : mAppsList) {
+            if (item.getUID() == uid) {
+                if (isWifi)
+                    item.setBlockWifi(!item.isBlockWifi());
+                else
+                    item.setBlockData(!item.isBlockData());
+            }
+        }
     }
 
     @Override

@@ -50,6 +50,7 @@ public class FireWallFragment extends Fragment implements FireWallContract.View 
     private static final String TAG = "PL_itto.FireWallFragment";
 
     private static final int REQUEST_SORT = 1;
+    private boolean mBlockWifiAll = false, mBlockDataAll = false;
     private FireWallContract.Presenter mPresenter;
     private static boolean firstStart = true;
     private AppCompatActivity mActivity;
@@ -62,7 +63,8 @@ public class FireWallFragment extends Fragment implements FireWallContract.View 
     private LinearLayout mLayoutAppList;
     private LinearLayout mLayoutNoApp;
     private FrameLayout mLayoutParentFW;
-
+    private ImageView mImgBlockData;
+    private ImageView mImgBlockWifi;
     private ImageView mSortIcon;
     private SearchView mSearchView;
     private CheckBox mCheckDataAll, mCheckWifiAll;
@@ -76,6 +78,8 @@ public class FireWallFragment extends Fragment implements FireWallContract.View 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mBlockDataAll = false;
+        mBlockWifiAll = false;
         setHasOptionsMenu(true);
         setRetainInstance(true);
         mAdRequest = new AdRequest.Builder().build();
@@ -90,6 +94,26 @@ public class FireWallFragment extends Fragment implements FireWallContract.View 
         mLayoutParentFW = (FrameLayout) root.findViewById(R.id.fw_main_layout);
         mImg_status_icon = (ImageView) root.findViewById(R.id.fw_status_icon);
         mTxt_status = (TextView) root.findViewById(R.id.fw_status_title);
+
+        // Select All wifi or data
+        mImgBlockData = (ImageView) root.findViewById(R.id.img_block_data);
+        mImgBlockWifi = (ImageView) root.findViewById(R.id.img_block_wifi);
+        mImgBlockWifi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBlockWifiAll = !mBlockWifiAll;
+                setBlockAll(0, mBlockWifiAll);
+            }
+        });
+
+        mImgBlockData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBlockDataAll=!mBlockDataAll;
+                setBlockAll(1,mBlockDataAll);
+            }
+        });
+
         mLayoutAppList = (LinearLayout) root.findViewById(R.id.fw_layout_app_list);
         mLayoutNoApp = (LinearLayout) root.findViewById(R.id.fw_no_app_layout);
         mScrollLayout = (ScrollChildSwipeRefreshLayout) root.findViewById(R.id.fw_refresh_layout);
@@ -247,7 +271,7 @@ public class FireWallFragment extends Fragment implements FireWallContract.View 
         } else {
             firstStart = false;
         }
-        if(list.size()>0){
+        if (list.size() > 0) {
             sortApps();
         }
 
@@ -255,18 +279,22 @@ public class FireWallFragment extends Fragment implements FireWallContract.View 
 
     @Override
     public void updateState(final boolean enabled) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (enabled) {
-                    mImg_status_icon.setImageResource(R.drawable.ic_fw_on);
-                    mTxt_status.setText(R.string.fw_on_title);
-                } else {
-                    mImg_status_icon.setImageResource(R.drawable.ic_fw_off);
-                    mTxt_status.setText(R.string.fw_off_title);
+        Activity activity = getActivity();
+        if (activity != null) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (enabled) {
+                        mImg_status_icon.setImageResource(R.drawable.ic_fw_on);
+                        mTxt_status.setText(R.string.fw_on_title);
+                    } else {
+                        mImg_status_icon.setImageResource(R.drawable.ic_fw_off);
+                        mTxt_status.setText(R.string.fw_off_title);
+                    }
                 }
-            }
-        });
+            });
+        }
+
 
     }
 
@@ -348,14 +376,15 @@ public class FireWallFragment extends Fragment implements FireWallContract.View 
 
         @Override
         public void onClick(View v) {
+
             switch (v.getId()) {
                 case R.id.img_3g_check:
                     Log.i(TAG, "onCheck: " + mPos);
-                    mPresenter.toggleAppState(false, mPos, mAppItem, m3G);
+                    mPresenter.toggleAppState(false,  mAppItem, m3G);
                     break;
                 case R.id.img_wifi_check:
                     Log.i(TAG, "onWifiCheck: " + mPos);
-                    mPresenter.toggleAppState(true, mPos, mAppItem, mWifi);
+                    mPresenter.toggleAppState(true,  mAppItem, mWifi);
                     break;
             }
         }
@@ -386,6 +415,7 @@ public class FireWallFragment extends Fragment implements FireWallContract.View 
             mItemListTemp.clear();
             mItemListTemp.addAll(list);
         }
+
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -426,6 +456,36 @@ public class FireWallFragment extends Fragment implements FireWallContract.View 
             Collections.sort(mItemListTemp, comparator);
             notifyDataSetChanged();
         }
+
+
+        void setBlockAll(int type, boolean blocked) {
+            if (mItemList != null && mItemListTemp != null) {
+                switch (type) {
+                    // block wifi:
+                    case 0:
+                        for (int i = 0; i < mItemList.size(); i++) {
+                            mItemList.get(i).setBlockWifi(blocked);
+                        }
+
+                        for (int i = 0; i < mItemListTemp.size(); i++) {
+                            mItemListTemp.get(i).setBlockWifi(blocked);
+                        }
+                        break;
+                    // block data
+                    case 1:
+                        for (int i = 0; i < mItemList.size(); i++) {
+                            mItemList.get(i).setBlockData(blocked);
+                        }
+
+                        for (int i = 0; i < mItemListTemp.size(); i++) {
+                            mItemListTemp.get(i).setBlockData(blocked);
+                        }
+                        break;
+                }
+                notifyDataSetChanged();
+            }
+        }
+
     }
 
     @Override
@@ -456,6 +516,13 @@ public class FireWallFragment extends Fragment implements FireWallContract.View 
 
     }
 
+    @Override
+    public void setBlockAll(int type, boolean blocked) {
+        if (mAppsAdapter != null) {
+            mAppsAdapter.setBlockAll(type, blocked);
+        }
+    }
+
     protected class SortComparator implements java.util.Comparator<AppItem> {
         private boolean mBlockTop;
         private int mType;
@@ -482,11 +549,11 @@ public class FireWallFragment extends Fragment implements FireWallContract.View 
                         }
 
                     } else {
-                        return 1;
+                        return -1;
                     }
                 } else {
                     if (o2.isBlocked()) {
-                        return -1;
+                        return 1;
                     } else {
                         switch (mType) {
                             case AppRepository.SORT_A_Z:

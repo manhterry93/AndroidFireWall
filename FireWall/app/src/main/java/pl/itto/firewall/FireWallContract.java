@@ -17,6 +17,7 @@ import pl.itto.firewall.data.AppItem;
 public interface FireWallContract {
     interface View extends BaseView<Presenter> {
         void sortApps();
+
         void showNoApps();
 
         void showApps(List<AppItem> list);
@@ -45,6 +46,13 @@ public interface FireWallContract {
 
         void clearSearch();
 
+        /**
+         * Set blockall Item or not
+         *
+         * @param type    0: wifi, 1: data
+         * @param blocked true if block, false if not
+         */
+        void setBlockAll(int type, boolean blocked);
     }
 
     interface Presenter extends BasePresenter {
@@ -67,5 +75,7 @@ public interface FireWallContract {
         void sortApps(Bundle setting);
 
         void toggleAppState(boolean isWifi, int pos, AppItem item, android.view.View v);
+
+        void toggleAppState(boolean isWifi, AppItem item, android.view.View v);
     }
 }

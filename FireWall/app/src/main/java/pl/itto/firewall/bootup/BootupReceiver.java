@@ -4,10 +4,15 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 import pl.itto.firewall.data.AppRepository;
 import pl.itto.firewall.utils.ScriptExecuter;
@@ -25,9 +30,10 @@ public class BootupReceiver extends BroadcastReceiver {
      */
 
     private static final String SCRIPT_FILE = "firewall.sh";
-
+    private Handler mHandler;
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, Intent intent) {
+        mHandler=new Handler();
         SharedPreferences sharedPreferences = context.getSharedPreferences(AppRepository.SHARE_PREFERENCE_NAME, Context.MODE_PRIVATE);
         boolean enabled = sharedPreferences.getBoolean(AppRepository.FIREWALL_STATE, false);
         if (enabled) {
@@ -35,9 +41,16 @@ public class BootupReceiver extends BroadcastReceiver {
             //Execute firewall
             String dir = context.getDir("bin", 0).getAbsolutePath();
             File file = new File(dir + "/" + SCRIPT_FILE);
-            ScriptExecuter executer = new ScriptExecuter(context, new UtilContract.ApplyRulesCallback() {
+            ScriptExecuter executer = new ScriptExecuter(context.getApplicationContext(), new UtilContract.ApplyRulesCallback() {
                 @Override
                 public void onApplyRuleDone(String msg) {
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context,"ApplyRule Done",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                     Log.i(TAG, "firewall is execute");
                 }
 
