@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Ultra Firewall</string>
-    <string name="version_name">1.0</string>
-
+    <string name="version_name">1.1</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Hủy</string>
+    <string name="exit_toast">Ấn 1 lần nữa để thoát!</string>
     <!--Main UI-->
     <string name="fw_off_title">Tường lửa tắt, cho phép tất cả ứng dụng truy cập internet</string>
     <string name="fw_on_title">Tường lửa bật, chặn những ứng dụng đã chọn truy cập internet</string>
     <string name="fw_no_app_found">Không có ứng dụng nào!</string>
     <string name="pid_title">UID\u0020\u0020\u0020\u0020\u0020\u0020\u0020</string>
     <string name="app_title">Thông tin ứng dụng</string>
+
+    <!--Sort-->
+    <string name="sort_block">Đưa ứng dụng bị chăn lên đầu</string>
+    <string name="sort_title">Sắp xếp</string>
 
     <!--Menu-->
     <string name="setting_title">Cài đặt</string>
@@ -29,10 +35,10 @@
 
     <!--About-->
     <string name="action_about">Thông tin</string>
-    <string name="app_info">Ultra Firewall ver 1.0</string>
+    <string name="app_info">Ultra Firewall ver 1.1</string>
     <string name="author">Tác giả: Phạm Văn Mạnh</string>
     <string name="email">Email: manhterry93@gmail.com</string>
     <string name="note">Note: Ứng dụng này cần truy cập quyền Root \n Thiết bị của bạn cần được root để sử dụng.</string>
-    <string name="icon_res">Icon Resources: https://icons8.com &amp;&amp; David Cross-http://webhostingmedia.net/</string>
+    <string name="icon_res">Icon Resources: David Cross-http://webhostingmedia.net/</string>
     <string name="about_like">Để lại đánh giá nếu bạn thích ứng dụng! ^_^ !</string>
 </resources>

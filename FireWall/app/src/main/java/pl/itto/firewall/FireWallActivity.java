@@ -53,7 +53,7 @@ public class FireWallActivity extends AppCompatActivity {
                 public void run() {
                     mExit = false;
                 }
-            }, 1000);
+            }, 1500);
         }
     }
 }

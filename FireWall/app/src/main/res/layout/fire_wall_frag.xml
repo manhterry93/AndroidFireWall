@@ -103,6 +103,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             ads:adSize="SMART_BANNER"
-            ads:adUnitId="@string/ad_unit_banner_test"/>
+            ads:adUnitId="@string/ad_unit_banner"/>
     </LinearLayout>
 </RelativeLayout>

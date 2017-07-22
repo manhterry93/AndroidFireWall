@@ -9,7 +9,7 @@
     <item
         android:width="60dp"
         android:height="60dp"
-        android:drawable="@drawable/ok"
+        android:drawable="@drawable/block"
         android:gravity="center"
         />
 </layer-list>

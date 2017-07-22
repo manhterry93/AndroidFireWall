@@ -43,7 +43,7 @@
         android:layout_toEndOf="@id/img_sort"
         android:layout_toStartOf="@id/checkbox_wifi_all"
         android:background="@drawable/background_shape"
-        app:queryHint="@string/search_hint"
+        app:queryHint="Search ..."
         app:iconifiedByDefault="false"
         app:searchIcon="@drawable/ic_search"/>
 </RelativeLayout>

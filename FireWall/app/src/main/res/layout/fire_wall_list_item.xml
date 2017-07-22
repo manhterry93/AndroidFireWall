@@ -45,12 +45,12 @@
         android:layout_width="@dimen/list_img_check_size"
         android:layout_height="@dimen/list_img_check_size"
         android:layout_marginLeft="@dimen/app_item_margin"
-        android:src="@drawable/allow"/>
+        android:src="@drawable/check_ok"/>
 
     <ImageView
         android:id="@+id/img_3g_check"
         android:layout_width="@dimen/list_img_check_size"
         android:layout_height="@dimen/list_img_check_size"
         android:layout_marginLeft="@dimen/app_item_margin"
-        android:src="@drawable/allow"/>
+        android:src="@drawable/check_ok"/>
 </LinearLayout>

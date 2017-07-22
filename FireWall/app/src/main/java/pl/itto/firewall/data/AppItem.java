@@ -10,8 +10,8 @@ import pl.itto.firewall.R;
  */
 
 public class AppItem {
-    public static final int ResAllow = R.drawable.allow;
-    public static final int ResBlock = R.drawable.block;
+    public static final int ResAllow = R.drawable.check_ok;
+    public static final int ResBlock = R.drawable.check_block;
 
     private Drawable mIcon;
     private int mUID;
