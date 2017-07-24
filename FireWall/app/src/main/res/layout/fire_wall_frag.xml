@@ -92,7 +92,7 @@
     <LinearLayout
         android:id="@+id/ad_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_ads_layout"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:layout_marginTop="@dimen/ads_margin_top">
